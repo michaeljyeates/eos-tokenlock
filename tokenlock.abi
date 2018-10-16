@@ -29,9 +29,13 @@
       "base": "",
       "fields": [
         {
-          "name": "tok",
-          "type": "asset"
+          "name": "user",
+          "type": "name"
         },
+          {
+            "name": "tok",
+            "type": "asset"
+          },
         {
           "name": "unlock_wait",
           "type": "uint64"
@@ -42,6 +46,10 @@
       "name": "unlockact",
       "base": "",
       "fields": [
+        {
+          "name": "user",
+          "type": "name"
+        },
         {
           "name": "tok",
           "type": "asset"

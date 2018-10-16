@@ -19,14 +19,9 @@ class tokenlock : public eosio::contract {
                      asset quantity,
                      string memo ) {
 
-            require_auth( _self );
+            require_auth( from );
 
-            if ( from != _self){
-                // only transfers from this account
-                return;
-            }
-
-            lockup_table locks(_self, _self);
+            lockup_table locks(_self, from);
 
             auto lock = locks.find(quantity.symbol.name());
             if ( lock != locks.end() ){
@@ -37,10 +32,10 @@ class tokenlock : public eosio::contract {
         }
 
       /// @abi action
-      void lock(asset tok, uint64_t time ) {
-          require_auth( _self );
+      void lock(name user, asset tok, uint64_t time ) {
+          require_auth( user );
 
-          lockup_table locks(_self, _self);
+          lockup_table locks(_self, user);
 
           auto lock = locks.find(tok.symbol.name());
 
@@ -67,10 +62,10 @@ class tokenlock : public eosio::contract {
           }
       }
       /// @abi action
-      void unlock(asset tok) {
-          require_auth( _self );
+      void unlock(name user, asset tok) {
+          require_auth( user );
 
-          lockup_table locks(_self, _self);
+          lockup_table locks(_self, user);
 
           auto lock = locks.find(tok.symbol.name());
           eosio_assert(lock != locks.end(), "Token is not managed");
