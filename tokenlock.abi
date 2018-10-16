@@ -33,7 +33,7 @@
           "type": "asset"
         },
         {
-          "name": "unlock_time",
+          "name": "unlock_wait",
           "type": "uint64"
         }
       ]
